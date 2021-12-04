@@ -1,0 +1,36 @@
+{
+    "4_anime_servers": {
+        "server_name": "4anime",
+        "server_extension_suffix": [
+            "gg",
+            "city",
+            "click",
+            "biz"
+        ],
+        "server_extension_prefix": [],
+        "server_routes": {
+            "home": {
+                "gg": "browse"
+            }
+        },
+        "connection_type": [
+            "https"
+        ],
+        "origins": [
+
+        ]
+    },
+    "kickass_anime_servers": {
+        "server_name": "kickassanime",
+        "server_extension_suffix": [
+            "ro"            
+        ],
+        "server_extension_prefix": ["www2"],
+        "connection_type": [
+            "https"
+        ],
+        "origins": [
+            
+        ]
+    }
+}

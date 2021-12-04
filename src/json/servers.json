@@ -1,0 +1,66 @@
+{
+    "9_anime_servers": {
+        "9_anime_server_1": "https://ww.9anime2.com",
+        "9_anime_server_2": "https://9anime-tv.com",
+        "9_anime_server_3": "https://ww.9animes.org",
+        "9_anime_server_4": "https://9anime.surf",
+        "9_anime_server_5": "https://9anime.cz",
+        "9_anime_server_6": "https://9anime.to",
+        "9_anime_server_7": "https://9anime.id",
+        "9_anime_server_8": "https://9anime.vc",
+        "9_anime_server_9": "https://9anime.gg"
+    },
+    "gogo_anime_servers": {
+        "gogo_anime_server_1": "https://gogoanime.cm",
+        "gogo_anime_server_2": "https://gogo-anime.su",
+        "gogo_anime_server_3": "https://ww2.gogoanimes.org",
+        "gogo_anime_server_4": "https://ww1.gogoanime2.org",
+        "gogo_anime_server_5": "https://gogoanime.sx",
+        "gogo_anime_server_6": "https://gogoanime.mom",
+        "gogo_anime_server_7": "https://ww1.gogoanime.cloud/gogoanime",
+        "gogo_anime_server_8": "https://gogoanime.wiki",
+        "gogo_anime_server_9": "https://gogoplay1.com"
+    },
+    "kiss_anime_servers": {
+        "kiss_anime_server_1": "https://kiss-anime.su/",
+        "kiss_anime_server_2": "https://ww1.kissanime2.org/",
+        "kiss_anime_server_3": "https://www1.kiss-anime.ws/"
+    },
+    "animepahe_servers": {
+        "animepahe_server_1": "https://animepahe.ru/",
+        "animepahe_server_2": "https://animepahe.com/",
+        "animepahe_server_3": "https://animepahe.org/"
+    },
+    "animekisa_servers": {
+        "animekisa_server_1": "https://animekisa.top/"
+    },
+    "twist_moe_servers": {
+        "twist_moe_server_1": "https://twist.moe/"
+    },
+    "animeheaven_servers": {
+        "animeheaven_server_1": "https://animeheaven.pro/",
+        "animeheaven_server_2": "https://animeheaven.su/",
+        "animeheaven_server_3": "https://animeheaven.site/",
+        "animeheaven_server_4": "https://animeheaven.online/home"
+    },
+    "kickass_anime_servers": {
+        "kickass_anime_server_1": "https://www2.kickassanime.ro"
+    },
+    "4_anime_servers": {
+        "4_anime_server_1": "https://4animes.org/",
+        "4_anime_server_2": "https://4anime.gg/browse",
+        "4_anime_server_3": "https://4anime.city/home/",
+        "4_anime_server_4": "https://4anime.click/",
+        "4_anime_server_5": "https://4anime.biz/" 
+    },
+    "chia_anime_server_14": "https://chia-anime.su/",
+    "anime_frenzy_server_16": "https://animefrenzy.org/",
+    "anime_show_server_17": "https://www2.animeshow.tv/",
+    "anime_id_server_19": "https://animeid.to/",
+    "animix_play_server_21": "https://animixplay.to/",
+    "anime_land_tv_server_22": "https://www.animelandtv.me/",
+    "anime_kaizoku_server_23": "https://animekaizoku.com/",
+    "anime_out_server_24": "https://animeout.xyz/",
+    "anidl_anime_server_26": "https://anidl.org/",
+    "kusonime_server_27": "https://kusonime.com/"
+}

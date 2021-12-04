@@ -1,0 +1,17 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /server/ping              --> github.com/egnimos/video-scrapper/src/controllers/ping.PingTest.Ping-fm (3 handlers)
+[GIN-debug] GET    /v1/anime-listing/:server --> github.com/egnimos/video-scrapper/src/controllers.Controllers.GetAnimeListing-fm (3 handlers)
+[GIN-debug] GET    /v1/search/:keyword       --> github.com/gin-gonic/gin.CustomRecoveryWithWriter.func1 (2 handlers)
+[GIN-debug] GET    /v1/anime-info/:anime_name/*path --> github.com/gin-gonic/gin.CustomRecoveryWithWriter.func1 (2 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2021/11/30 - 04:19:12 |[97;42m 200 [0m|            0s |             ::1 |[97;44m GET     [0m "/server/ping"
+[GIN] 2021/11/30 - 04:19:33 |[97;42m 200 [0m|            0s |             ::1 |[97;44m GET     [0m "/server/ping"
+[GIN] 2021/11/30 - 04:20:15 |[97;42m 200 [0m|            0s |             ::1 |[97;44m GET     [0m "/server/ping"
+[GIN] 2021/11/30 - 04:21:50 |[97;42m 200 [0m|     8.990302s |             ::1 |[97;44m GET     [0m "/v1/anime-listing/kickass"
