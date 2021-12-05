@@ -5,13 +5,18 @@ var (
 )
 
 type Sel interface {
-	Find() string
+	Find(sel string) string
 }
 
 type sel struct{}
 
-func (s *sel) Find() string {
-	return ""
+func (s *sel) Find(sel string) string {
+	switch sel {
+	case "":
+		return s.kickass()
+	default:
+		return ""
+	}
 }
 
 func (s *sel) kickass() string {
