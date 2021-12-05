@@ -71,3 +71,11 @@ func (n *nineAnime) EpisodesInfoSelector(serverCount int, path string) map[strin
 func (n *nineAnime) EpisodesInfoHtmlParser(value map[string]interface{}) (utility.RestError, []string) {
 	return nil, nil
 }
+
+func (n *nineAnime) SearchAnimeSelector(keyword string) map[string]interface{} {
+	return nil
+} 
+
+func (n *nineAnime) SearchAnimeHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeInfos) {
+	return nil, nil
+}

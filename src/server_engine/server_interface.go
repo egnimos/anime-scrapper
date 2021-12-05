@@ -14,6 +14,8 @@ type AnimeServerInterface interface {
 	EpisodesHtmlParser(value map[string]interface{}) (utility.RestError, map[string]interface{})
 	EpisodesInfoSelector(serverCount int, path string) map[string]interface{}
 	EpisodesInfoHtmlParser(value map[string]interface{}) (utility.RestError, []string)
+	SearchAnimeSelector(keyword string) map[string]interface{}
+	SearchAnimeHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeInfos)
 }
 
 // type ChoosenServerInterface interface {

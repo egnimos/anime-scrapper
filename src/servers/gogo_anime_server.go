@@ -70,3 +70,11 @@ func (g *gogoAnime) EpisodesInfoSelector(serverCount int, path string) map[strin
 func (g *gogoAnime) EpisodesInfoHtmlParser(value map[string]interface{}) (utility.RestError, []string) {
 	return nil, nil
 }
+
+func (g *gogoAnime) SearchAnimeSelector(keyword string) map[string]interface{} {
+	return nil
+} 
+
+func (g *gogoAnime) SearchAnimeHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeInfos) {
+	return nil, nil
+}

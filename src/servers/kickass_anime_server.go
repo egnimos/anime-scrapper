@@ -294,3 +294,11 @@ func (k *kickass) EpisodesInfoHtmlParser(value map[string]interface{}) (utility.
 
 	return nil, iframes
 }
+
+func (k *kickass) SearchAnimeSelector(keyword string) map[string]interface{} {
+	return nil
+}
+
+func (k *kickass) SearchAnimeHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeInfos) {
+	return nil, nil
+}
