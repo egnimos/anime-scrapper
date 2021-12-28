@@ -18,6 +18,7 @@ type AnimeListing struct {
 type AnimeEpisode struct {
 	EpisodePath string `json:"episode_path"`
 	Episode     string `json:"episode"`
+	DataSrc     string `json:"data_src"`
 }
 
 type AnimeListings []AnimeListing

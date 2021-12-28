@@ -26,7 +26,10 @@ type serverRepository struct{}
 //get the list of anime
 func (s *serverRepository) AnimeListing(animeServer AnimeServerInterface, serverCount int, pageCount int) (utility.RestError, repository.AnimeListings) {
 	//get the anime listing selectors and url in form of MAP
-	value := animeServer.AnimeListingSelector(serverCount, pageCount)
+	selErr, value := animeServer.AnimeListingSelector(serverCount, pageCount)
+	if selErr != nil {
+		return selErr, nil
+	}
 	fmt.Println(value)
 
 	//parse the return HTML and convert it into the struct
@@ -41,7 +44,10 @@ func (s *serverRepository) AnimeListing(animeServer AnimeServerInterface, server
 //get the anime info
 func (s *serverRepository) AnimeInfo(animeServer AnimeServerInterface, serverCount int, path string) (utility.RestError, *repository.AnimeInfo) {
 	//get the anime info
-	value := animeServer.AnimeInfoSelector(serverCount, path)
+	selErr, value := animeServer.AnimeInfoSelector(serverCount, path)
+	if selErr != nil {
+		return selErr, nil
+	}
 
 	//parse the return HTML and convert it into struct
 	return animeServer.AnimeInfoHtmlParser(value)
@@ -49,7 +55,10 @@ func (s *serverRepository) AnimeInfo(animeServer AnimeServerInterface, serverCou
 
 func (s *serverRepository) AnimeEpisodes(animeServer AnimeServerInterface, serverCount int, pageCount int, path string) (utility.RestError, map[string]interface{}) {
 	//get the anime episodes
-	value := animeServer.EpisodesSelector(serverCount, pageCount, path)
+	selErr, value := animeServer.EpisodesSelector(serverCount, pageCount, path)
+	if selErr != nil {
+		return selErr, nil
+	}
 
 	//parse the return HTML and convert it into struct
 	return animeServer.EpisodesHtmlParser(value)
@@ -57,7 +66,10 @@ func (s *serverRepository) AnimeEpisodes(animeServer AnimeServerInterface, serve
 
 func (s *serverRepository) AnimeEpisodeInfo(animeServer AnimeServerInterface, serverCount int, path string) (utility.RestError, []string) {
 	//get the anime info
-	value := animeServer.EpisodesInfoSelector(serverCount, path)
+	selErr, value := animeServer.EpisodesInfoSelector(serverCount, path)
+	if selErr != nil {
+		return selErr, nil
+	}
 
 	//parse the return HTML and convert it into struct
 	return animeServer.EpisodesInfoHtmlParser(value)

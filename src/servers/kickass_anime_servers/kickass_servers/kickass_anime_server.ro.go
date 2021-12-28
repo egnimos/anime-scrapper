@@ -1,4 +1,4 @@
-package servers
+package kickass_servers
 
 import (
 	"bytes"
@@ -11,22 +11,23 @@ import (
 	"github.com/chromedp/chromedp"
 	"github.com/egnimos/anime-scrapper/src/repository"
 	"github.com/egnimos/anime-scrapper/src/server_engine"
+	"github.com/egnimos/anime-scrapper/src/servers"
 	"github.com/egnimos/anime-scrapper/src/utility"
 )
 
 var (
-	GetKickAssServer server_engine.AnimeServerInterface = &kickass{}
+	GetKickAssServerRo server_engine.AnimeServerInterface = &kickassRo{}
 )
 
-type kickass struct{}
+type kickassRo struct{}
 
-func (k *kickass) getServerKey(serverCount int) string {
+func (k *kickassRo) getServerKey(serverCount int) string {
 	serverName := "kickass_anime_server"
 	return fmt.Sprintf("%s_%d", serverName, serverCount)
 }
 
 //get the list of anime
-func (k *kickass) AnimeListingSelector(serverCount int, pageCount int) map[string]interface{} {
+func (k *kickassRo) AnimeListingSelector(serverCount int, pageCount int) (utility.RestError, map[string]interface{}) {
 	server := k.getServerKey(serverCount)
 	url := fmt.Sprintf("%s/anime-list", server_engine.ParsedServers.KickassanimeServers[server])
 	var innerHTML string
@@ -57,17 +58,17 @@ func (k *kickass) AnimeListingSelector(serverCount int, pageCount int) map[strin
 		chromedp.InnerHTML(`#content div.row.video-list.row.mx-0 div.col.row.video-list.row.mx-0`, &innerHTML),
 	}
 	//run the assigned task
-	InitializeChromeDp(func() chromedp.Tasks {
+	servers.InitializeChromeDp(func() chromedp.Tasks {
 		return tasks
 	})
 
-	return map[string]interface{}{
+	return nil, map[string]interface{}{
 		"innerHTML": innerHTML,
 	}
 }
 
 //parse anime listing html return value
-func (k *kickass) AnimeListingHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeListings) {
+func (k *kickassRo) AnimeListingHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeListings) {
 	innerHTML := value["innerHTML"]
 	byteData := []byte(innerHTML.(string))
 	readerData := bytes.NewReader(byteData)
@@ -98,7 +99,7 @@ func (k *kickass) AnimeListingHtmlParser(value map[string]interface{}) (utility.
 }
 
 //get the anime info
-func (k *kickass) AnimeInfoSelector(serverCount int, path string) map[string]interface{} {
+func (k *kickassRo) AnimeInfoSelector(serverCount int, path string) (utility.RestError, map[string]interface{}) {
 	server := k.getServerKey(serverCount)
 	url := fmt.Sprintf("%s%s", server_engine.ParsedServers.KickassanimeServers[server], path)
 	var innerHTML string
@@ -108,17 +109,17 @@ func (k *kickass) AnimeInfoSelector(serverCount int, path string) map[string]int
 		chromedp.InnerHTML(`div#main.container-fluid.pt-3`, &innerHTML),
 	}
 	//run the assigned task
-	InitializeChromeDp(func() chromedp.Tasks {
+	servers.InitializeChromeDp(func() chromedp.Tasks {
 		return tasks
 	})
 
-	return map[string]interface{}{
+	return nil, map[string]interface{}{
 		"innerHTML": innerHTML,
 	}
 }
 
 //anime info html parser
-func (k *kickass) AnimeInfoHtmlParser(value map[string]interface{}) (utility.RestError, *repository.AnimeInfo) {
+func (k *kickassRo) AnimeInfoHtmlParser(value map[string]interface{}) (utility.RestError, *repository.AnimeInfo) {
 	innerHTML := value["innerHTML"]
 	byteData := []byte(innerHTML.(string))
 	readerData := bytes.NewReader(byteData)
@@ -168,7 +169,7 @@ func (k *kickass) AnimeInfoHtmlParser(value map[string]interface{}) (utility.Res
 }
 
 //get the list of episodes of the given anime
-func (k *kickass) EpisodesSelector(serverCount int, pageCount int, path string) map[string]interface{} {
+func (k *kickassRo) EpisodesSelector(serverCount int, pageCount int, path string) (utility.RestError, map[string]interface{}) {
 	server := k.getServerKey(serverCount)
 	url := fmt.Sprintf("%s%s", server_engine.ParsedServers.KickassanimeServers[server], path)
 	var innerHTML string
@@ -193,17 +194,17 @@ func (k *kickass) EpisodesSelector(serverCount int, pageCount int, path string) 
 		chromedp.InnerHTML(`#content div.main-episode-list.border.rounded.p-3.mb-3`, &innerHTML),
 	}
 	//run the assigned task
-	InitializeChromeDp(func() chromedp.Tasks {
+	servers.InitializeChromeDp(func() chromedp.Tasks {
 		return tasks
 	})
 
-	return map[string]interface{}{
+	return nil, map[string]interface{}{
 		"innerHTML": innerHTML,
 	}
 }
 
 //parse the episodes html
-func (k *kickass) EpisodesHtmlParser(value map[string]interface{}) (utility.RestError, map[string]interface{}) {
+func (k *kickassRo) EpisodesHtmlParser(value map[string]interface{}) (utility.RestError, map[string]interface{}) {
 	innerHTML := value["innerHTML"]
 	byteData := []byte(innerHTML.(string))
 	readerData := bytes.NewReader(byteData)
@@ -230,11 +231,11 @@ func (k *kickass) EpisodesHtmlParser(value map[string]interface{}) (utility.Rest
 	})
 
 	//check if the next button is enabled then we can paginate
-	paginateStatus := "not-disabled"
+	paginateStatus := "available"
 	doc.Find(`div.row.align-items-end div.text-right.col-lg-3.col-12 div.mb-3.btn-group button.btn.btn-primary`).Each(func(i int, s *goquery.Selection) {
 		direction := s.Find(`svg`).AttrOr("data-icon", "empty")
 		if direction == "chevron-right" {
-			paginateStatus = s.AttrOr("disabled", "not-disabled")
+			paginateStatus = s.AttrOr("disabled", "available")
 			fmt.Printf("%s", paginateStatus)
 		}
 	})
@@ -246,7 +247,7 @@ func (k *kickass) EpisodesHtmlParser(value map[string]interface{}) (utility.Rest
 }
 
 //get the episode info and there servers to play the anime video
-func (k *kickass) EpisodesInfoSelector(serverCount int, path string) map[string]interface{} {
+func (k *kickassRo) EpisodesInfoSelector(serverCount int, path string) (utility.RestError, map[string]interface{}) {
 	server := k.getServerKey(serverCount)
 	url := fmt.Sprintf("%s%s", server_engine.ParsedServers.KickassanimeServers[server], path)
 	var innerHTML string
@@ -256,17 +257,17 @@ func (k *kickass) EpisodesInfoSelector(serverCount int, path string) map[string]
 		chromedp.InnerHTML(`#content div.player-wrapper.mb-3`, &innerHTML),
 	}
 	//run the assigned task
-	InitializeChromeDp(func() chromedp.Tasks {
+	servers.InitializeChromeDp(func() chromedp.Tasks {
 		return tasks
 	})
 
-	return map[string]interface{}{
+	return nil, map[string]interface{}{
 		"innerHTML": innerHTML,
 	}
 }
 
 //parse the given episode info scraped by the method epiusodeinfoselector
-func (k *kickass) EpisodesInfoHtmlParser(value map[string]interface{}) (utility.RestError, []string) {
+func (k *kickassRo) EpisodesInfoHtmlParser(value map[string]interface{}) (utility.RestError, []string) {
 	innerHTML := value["innerHTML"]
 	byteData := []byte(innerHTML.(string))
 	readerData := bytes.NewReader(byteData)
@@ -295,10 +296,10 @@ func (k *kickass) EpisodesInfoHtmlParser(value map[string]interface{}) (utility.
 	return nil, iframes
 }
 
-func (k *kickass) SearchAnimeSelector(keyword string) map[string]interface{} {
-	return nil
+func (k *kickassRo) SearchAnimeSelector(keyword string) (utility.RestError, map[string]interface{}) {
+	return nil, nil
 }
 
-func (k *kickass) SearchAnimeHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeInfos) {
+func (k *kickassRo) SearchAnimeHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeInfos) {
 	return nil, nil
 }

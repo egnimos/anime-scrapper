@@ -6,15 +6,15 @@ import (
 )
 
 type AnimeServerInterface interface {
-	AnimeListingSelector(serverCount int, pageCount int) map[string]interface{}
+	AnimeListingSelector(serverCount int, pageCount int) (utility.RestError, map[string]interface{})
 	AnimeListingHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeListings)
-	AnimeInfoSelector(serverCount int, path string) map[string]interface{}
+	AnimeInfoSelector(serverCount int, path string) (utility.RestError, map[string]interface{})
 	AnimeInfoHtmlParser(value map[string]interface{}) (utility.RestError, *repository.AnimeInfo)
-	EpisodesSelector(serverCount int, pageCount int, path string) map[string]interface{}
+	EpisodesSelector(serverCount int, pageCount int, path string) (utility.RestError, map[string]interface{})
 	EpisodesHtmlParser(value map[string]interface{}) (utility.RestError, map[string]interface{})
-	EpisodesInfoSelector(serverCount int, path string) map[string]interface{}
+	EpisodesInfoSelector(serverCount int, path string) (utility.RestError, map[string]interface{})
 	EpisodesInfoHtmlParser(value map[string]interface{}) (utility.RestError, []string)
-	SearchAnimeSelector(keyword string) map[string]interface{}
+	SearchAnimeSelector(keyword string) (utility.RestError, map[string]interface{})
 	SearchAnimeHtmlParser(value map[string]interface{}) (utility.RestError, repository.AnimeInfos)
 }
 
