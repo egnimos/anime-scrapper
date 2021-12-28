@@ -13,7 +13,7 @@
 *.env
 *.yml
 !network.log
-/json/*
+src/json/*
 
 
 # Dependency directories (remove the comment below to include it)
